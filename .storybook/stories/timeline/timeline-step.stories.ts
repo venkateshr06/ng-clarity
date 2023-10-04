@@ -14,9 +14,9 @@ const defaultStory: Story = args => ({
   template: `
     <clr-timeline>
       <clr-timeline-step [clrState]="clrState">
-        <clr-timeline-step-header *ngIf="header">{{header}}</clr-timeline-step-header>
-        <clr-timeline-step-title *ngIf="title">{{title}}</clr-timeline-step-title>
-        <clr-timeline-step-description *ngIf="description">{{description}}</clr-timeline-step-description>
+        <clr-timeline-step-header *ngIf="header">{{ header }}</clr-timeline-step-header>
+        <clr-timeline-step-title *ngIf="title">{{ title }}</clr-timeline-step-title>
+        <clr-timeline-step-description *ngIf="description">{{ description }}</clr-timeline-step-description>
       </clr-timeline-step>
     </clr-timeline>
   `,

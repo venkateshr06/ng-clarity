@@ -13,16 +13,11 @@ import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 const defaultStory: Story = args => ({
   template: `
     <div style="text-align: center">
-      <clr-spinner
-        [clrInverse]="clrInverse"
-        [clrSmall]="clrSmall"
-        [clrMedium]="clrMedium"
-        [clrInline]="clrInline"
-      >
-        {{text}}
+      <clr-spinner [clrInverse]="clrInverse" [clrSmall]="clrSmall" [clrMedium]="clrMedium" [clrInline]="clrInline">
+        {{ text }}
       </clr-spinner>
       <br *ngIf="!clrInline" />
-      {{text}}
+      {{ text }}
     </div>
   `,
   props: { ...args },

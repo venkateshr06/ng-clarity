@@ -12,19 +12,13 @@ import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 
 const defaultStory: Story = args => ({
   template: `
-    <div style="margin-top: 200px; text-align: center;">
+    <div style="margin-top: 200px; text-align: center">
       <clr-button-group [clrMenuPosition]="clrMenuPosition" [clrToggleButtonAriaLabel]="clrToggleButtonAriaLabel">
-        <clr-button
-          *ngFor="let _ of createArray(buttonCount); let i = index"
-          [clrInMenu]="false"
-        >
-          {{content}} {{i + 1}}
+        <clr-button *ngFor="let _ of createArray(buttonCount); let i = index" [clrInMenu]="false">
+          {{ content }} {{ i + 1 }}
         </clr-button>
-        <clr-button
-          *ngFor="let _ of createArray(inMenuButtonCount); let i = index"
-          [clrInMenu]="true"
-        >
-          {{content}} {{buttonCount + i + 1}}
+        <clr-button *ngFor="let _ of createArray(inMenuButtonCount); let i = index" [clrInMenu]="true">
+          {{ content }} {{ buttonCount + i + 1 }}
         </clr-button>
       </clr-button-group>
     </div>

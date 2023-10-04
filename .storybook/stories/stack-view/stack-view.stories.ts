@@ -13,10 +13,7 @@ import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 const defaultStory: Story = args => ({
   template: `
     <clr-stack-view>
-      <clr-stack-block
-        *ngFor="let _ of createArray(blockCount); let i = index"
-        [clrSbExpanded]="!!openIndices[i]"
-      >
+      <clr-stack-block *ngFor="let _ of createArray(blockCount); let i = index" [clrSbExpanded]="!!openIndices[i]">
         <clr-stack-label>{{ label }} {{ i + 1 }}</clr-stack-label>
         <clr-stack-content>{{ content }}</clr-stack-content>
         <clr-stack-block>

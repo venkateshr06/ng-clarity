@@ -12,10 +12,10 @@ import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 
 const defaultStory: Story = args => ({
   template: `
-    <div style="margin-top: 300px; text-align: center;">
-      <clr-date-container style="display: inline-block;" [clrPosition]="clrPosition">
+    <div style="margin-top: 300px; text-align: center">
+      <clr-date-container style="display: inline-block" [clrPosition]="clrPosition">
         <label>Date</label>
-        <input type="date" autocomplete="off" clrDate>
+        <input type="date" autocomplete="off" clrDate />
       </clr-date-container>
     </div>
   `,

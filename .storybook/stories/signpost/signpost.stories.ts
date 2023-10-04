@@ -26,11 +26,11 @@ const positions: string[] = [
 ];
 
 const defaultStory: Story = args => ({
-  template: ` 
-    <div style="margin-top: 100px; text-align: center;">
+  template: `
+    <div style="margin-top: 100px; text-align: center">
       <clr-signpost>
         <clr-signpost-content [clrPosition]="clrPosition">
-          {{content}}
+          {{ content }}
         </clr-signpost-content>
       </clr-signpost>
     </div>

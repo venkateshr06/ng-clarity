@@ -20,14 +20,10 @@ const defaultStory: Story = args => ({
         </button>
         <clr-dropdown-menu [clrPosition]="clrPosition" *clrIfOpen="true">
           <label class="dropdown-header" aria-hidden="true">Menus</label>
-          <clr-dropdown
-            *ngFor="let _ of createArray(menuCount); let menuIndex = index"
-          >
+          <clr-dropdown *ngFor="let _ of createArray(menuCount); let menuIndex = index">
             <button clrDropdownTrigger>Menu {{ menuIndex + 1 }}</button>
             <clr-dropdown-menu>
-              <label class="dropdown-header" aria-hidden="true">
-                Menu {{ menuIndex + 1 }} Actions
-              </label>
+              <label class="dropdown-header" aria-hidden="true">Menu {{ menuIndex + 1 }} Actions</label>
               <div
                 *ngFor="let _ of createArray(actionCount); let actionIndex = index"
                 [attr.aria-label]="'Action' + (actionIndex + 1)"

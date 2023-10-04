@@ -13,7 +13,7 @@ import { ALERT_TYPES } from '../../../projects/angular/src/emphasis/alert/utils/
 import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 
 const defaultStory: Story = args => ({
-  template: ` 
+  template: `
     <clr-alert
       [clrAlertAppLevel]="clrAlertAppLevel"
       [clrAlertClosable]="clrAlertClosable"
@@ -26,7 +26,7 @@ const defaultStory: Story = args => ({
       (clrAlertClosedChange)="clrAlertClosedChange($event)"
     >
       <clr-alert-item *ngFor="let _ of createArray(itemCount); let i = index">
-        <span class="alert-text">{{content}} {{i + 1}}</span>
+        <span class="alert-text">{{ content }} {{ i + 1 }}</span>
       </clr-alert-item>
     </clr-alert>
   `,

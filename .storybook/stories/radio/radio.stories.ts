@@ -11,10 +11,10 @@ import { Story } from '@storybook/angular';
 import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 
 const defaultStory: Story = args => ({
-  template: ` 
+  template: `
     <clr-radio-wrapper>
       <input type="radio" clrRadio value="i + 1" [checked]="checked" [disabled]="disabled" />
-      <label>{{label}}</label>
+      <label>{{ label }}</label>
     </clr-radio-wrapper>
   `,
   props: { ...args },

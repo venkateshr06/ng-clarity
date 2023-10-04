@@ -20,11 +20,12 @@ const defaultStory: Story = args => ({
       </button>
       <clr-dropdown-menu clrFocusOnViewInit="false">
         <clr-tree>
-          <clr-tree-node 
+          <clr-tree-node
             *clrRecursiveFor="let file of files; getChildren: getChildren"
             [clrExpanded]="true"
-            [clrSelected]="true">
-            {{file.name}}
+            [clrSelected]="true"
+          >
+            {{ file.name }}
           </clr-tree-node>
         </clr-tree>
       </clr-dropdown-menu>

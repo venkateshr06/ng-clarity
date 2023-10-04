@@ -24,8 +24,8 @@ enum LabelType {
 const defaultStory: Story = args => ({
   template: `
     <span class="label" [class.clickable]="clickable" [ngClass]="labelType">
-      <span class="text">{{content}}</span>
-      <span *ngIf="badgeContent" class="badge">{{badgeContent}}</span>
+      <span class="text">{{ content }}</span>
+      <span *ngIf="badgeContent" class="badge">{{ badgeContent }}</span>
       <cds-icon *ngIf="closeIcon" shape="close"></cds-icon>
     </span>
   `,

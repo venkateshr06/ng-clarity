@@ -17,7 +17,7 @@ const defaultStory: Story = args => ({
     <div>
       This list is provided to demonstrate scrolling capability when modal is open.
       <ul>
-        <li *ngFor="let _ of createArray(100); let i = index">{{i + 1}}</li>
+        <li *ngFor="let _ of createArray(100); let i = index">{{ i + 1 }}</li>
       </ul>
     </div>
     <clr-modal
@@ -32,9 +32,9 @@ const defaultStory: Story = args => ({
       (clrModalAlternateClose)="clrModalAlternateClose($event)"
       (clrModalOpenChange)="clrModalOpen = $event; clrModalOpenChange($event)"
     >
-      <h3 class="modal-title">{{title}}</h3>
+      <h3 class="modal-title">{{ title }}</h3>
       <div class="modal-body">
-        {{body}}
+        {{ body }}
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline" (click)="clrModalOpen = false">Cancel</button>

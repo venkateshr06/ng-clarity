@@ -15,7 +15,8 @@ const defaultStory: Story = args => ({
   template: `
     <clr-date-container>
       <label>Date</label>
-      <input #date
+      <input
+        #date
         type="date"
         [id]="id"
         [clrDate]="getDateObject(clrDate || date.value)"

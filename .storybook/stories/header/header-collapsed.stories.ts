@@ -12,9 +12,7 @@ import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 
 const defaultStory: Story = args => ({
   template: `
-
-  <iframe width="500" src="/iframe.html?args=&id=header-header--default&viewMode=story" style="border: none;"></iframe>
-    
+    <iframe width="500" src="/iframe.html?args=&id=header-header--default&viewMode=story" style="border: none"></iframe>
   `,
   props: { ...args },
 });

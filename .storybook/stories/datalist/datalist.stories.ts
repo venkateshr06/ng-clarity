@@ -17,7 +17,7 @@ const defaultStory: Story = args => ({
       <input clrDatalistInput [disabled]="disabled" placeholder="Options" />
       <datalist>
         <ng-container *ngFor="let element of elements; let i = index">
-          <option *ngIf="i < optionCount" [value]="element.symbol">{{element.name}}</option>
+          <option *ngIf="i < optionCount" [value]="element.symbol">{{ element.name }}</option>
         </ng-container>
       </datalist>
       <clr-control-helper>Helper text</clr-control-helper>

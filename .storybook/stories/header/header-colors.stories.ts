@@ -12,14 +12,14 @@ import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 
 const defaultStory: Story = args => ({
   template: `
-  <header class="{{color}}">
-    <div class="branding">
-      <a href="javascript://" class="nav-link">
-        <cds-icon shape="vm-bug"></cds-icon>
-        <span class="title">Clarity Design</span>
-      </a>
-    </div>
-  </header>
+    <header class="{{ color }}">
+      <div class="branding">
+        <a href="javascript://" class="nav-link">
+          <cds-icon shape="vm-bug"></cds-icon>
+          <span class="title">Clarity Design</span>
+        </a>
+      </div>
+    </header>
   `,
   props: { ...args },
 });

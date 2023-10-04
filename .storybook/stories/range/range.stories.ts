@@ -11,9 +11,9 @@ import { Story } from '@storybook/angular';
 import { setupStorybook } from '../../helpers/setup-storybook.helpers';
 
 const defaultStory: Story = args => ({
-  template: ` 
+  template: `
     <clr-range-container [clrRangeHasProgress]="clrRangeHasProgress">
-      <label>{{label}}</label>
+      <label>{{ label }}</label>
       <input type="range" clrRange [value]="value" [disabled]="disabled" />
     </clr-range-container>
   `,
