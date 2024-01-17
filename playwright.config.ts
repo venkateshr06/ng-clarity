@@ -6,6 +6,14 @@
 
 import { defineConfig, devices } from '@playwright/test';
 
+const browser = process.env['CLARITY_VRT_BROWSER'];
+
+const deviceMap = {
+  chromium: 'Desktop Chrome',
+  firefox: 'Desktop Firefox',
+  webkit: 'Desktop Safari',
+};
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -23,8 +31,8 @@ export default defineConfig({
   reporter: 'html',
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: browser,
+      use: { ...devices[deviceMap[browser]] },
     },
   ],
   webServer: {
