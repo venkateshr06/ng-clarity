@@ -48,7 +48,7 @@ export class IfControlStateService implements OnDestroy {
           // Subscribe to the status change events, only after touched
           // and emit the control
           this.subscriptions.push(
-            this.secondaryControl.statusChanges?.subscribe(() => {
+            this.secondaryControl?.statusChanges?.subscribe(() => {
               this.triggerStatusChange();
             })
           );

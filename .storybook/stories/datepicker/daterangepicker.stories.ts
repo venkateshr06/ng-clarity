@@ -71,18 +71,20 @@ const DateRangePickerTemplate: StoryFn = args => ({
   template: `
     <clr-date-range-container [min]="getDateString(min)" [max]="getDateString(max)" [dateFormat]="dateFormat">
       <label for="dateRangeCtrl">Date Range</label>
-      <input #startDate
+      <input
+        #startDate
         id="startDate"
-        aria-labelledby='dateRangeCtrl'
+        aria-labelledby="dateRangeCtrl"
         name="startDate"
         type="date"
         [disabled]="disabled"
         [clrRangeStartDate]="getDateObject(clrRangeStartDate || startDate.value, dateFormat)"
         (clrRangeStartDateChange)="clrRangeStartDateChange($event)"
       />
-      <input #endDate
+      <input
+        #endDate
         id="endDate"
-        aria-labelledby='dateRangeCtrl'
+        aria-labelledby="dateRangeCtrl"
         name="endDate"
         type="date"
         [disabled]="disabled"

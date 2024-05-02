@@ -60,7 +60,8 @@ const DatePickerTemplate: StoryFn = args => ({
   template: `
     <clr-date-container [dateFormat]="dateFormat">
       <label>Date</label>
-      <input #date
+      <input
+        #date
         type="date"
         [id]="id"
         [clrDate]="getDateObject(date.value)"
