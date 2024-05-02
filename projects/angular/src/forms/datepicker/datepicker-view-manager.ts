@@ -16,7 +16,6 @@ import { ViewManagerService } from './providers/view-manager.service';
   templateUrl: './datepicker-view-manager.html',
   providers: [DatepickerFocusService],
   host: {
-    '[class.datepicker]': 'true',
     '[attr.aria-modal]': 'true',
     '[attr.aria-label]': 'commonStrings.keys.datepickerDialogLabel',
     role: 'dialog',

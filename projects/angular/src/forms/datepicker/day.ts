@@ -5,25 +5,35 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 
 import { ClrCommonStringsService } from '../../utils/i18n/common-strings.service';
-import { ClrPopoverToggleService } from '../../utils/popover/providers/popover-toggle.service';
 import { DayViewModel } from './model/day-view.model';
 import { DayModel } from './model/day.model';
 import { DateFormControlService } from './providers/date-form-control.service';
 import { DateNavigationService } from './providers/date-navigation.service';
+import { DatePickerHelperService } from './providers/datepicker-helper.service';
 
 @Component({
   selector: 'clr-day',
   template: `
     <button
+      #dayBtn
       class="day-btn"
       type="button"
       [class.is-today]="dayView.isTodaysDate"
       [class.is-excluded]="dayView.isExcluded"
       [class.is-disabled]="dayView.isDisabled"
       [class.is-selected]="dayView.isSelected"
+      [class.in-range]="isInRange()"
+      [class.is-start-range]="
+        _dateNavigationService.isRangePicker &&
+        dayView?.dayModel?.toComparisonString() === _dateNavigationService.selectedDay?.toComparisonString()
+      "
+      [class.is-end-range]="
+        _dateNavigationService.isRangePicker &&
+        dayView?.dayModel?.toComparisonString() === _dateNavigationService.selectedEndDay?.toComparisonString()
+      "
       [attr.tabindex]="dayView.tabIndex"
       (click)="selectDay()"
       (focus)="onDayViewFocus()"
@@ -40,8 +50,8 @@ export class ClrDay {
   private _dayView: DayViewModel;
 
   constructor(
-    private _dateNavigationService: DateNavigationService,
-    private _toggleService: ClrPopoverToggleService,
+    public _dateNavigationService: DateNavigationService,
+    private _datePickerHelperService: DatePickerHelperService,
     private dateFormControlService: DateFormControlService,
     private commonStrings: ClrCommonStringsService
   ) {}
@@ -66,6 +76,13 @@ export class ClrDay {
       : this._dayView.dayModel.toDateString();
   }
 
+  @HostListener('mouseenter')
+  hoverListener() {
+    if (!this.dayView.isExcluded && !this.dayView.isDisabled) {
+      this._dateNavigationService.hoveredDay = this.dayView.dayModel;
+    }
+  }
+
   /**
    * Updates the focusedDay in the DateNavigationService when the ClrDay is focused.
    */
@@ -78,8 +95,27 @@ export class ClrDay {
    */
   selectDay(): void {
     const day: DayModel = this.dayView.dayModel;
-    this._dateNavigationService.notifySelectedDayChanged(day);
-    this.dateFormControlService.markAsDirty();
-    this._toggleService.open = false;
+    this._datePickerHelperService.selectDay(day);
+  }
+
+  isInRange() {
+    if (!this._dateNavigationService.isRangePicker) {
+      return false;
+    }
+    if (this._dateNavigationService.selectedDay && this._dateNavigationService.selectedEndDay) {
+      // return this._dayView.dayModel.toDate()?.getTime() > this._dateNavigationService.selectedDay?.toDate()?.getTime() && this._dayView.dayModel.toDate()?.getTime() < this._dateNavigationService.selectedEndDay?.toDate()?.getTime();
+      return (
+        this._dayView.dayModel.isAfter(this._dateNavigationService.selectedDay) &&
+        this._dayView.dayModel.isBefore(this._dateNavigationService.selectedEndDay)
+      );
+    } else if (this._dateNavigationService.selectedDay && !this._dateNavigationService.selectedEndDay) {
+      // return this._dayView.dayModel.toDate()?.getTime() > this._dateNavigationService.selectedDay?.toDate()?.getTime() && this._dayView.dayModel.toDate()?.getTime() < this._dateNavigationService.hoveredDay?.toDate()?.getTime();
+      return (
+        this._dayView.dayModel.isAfter(this._dateNavigationService.selectedDay) &&
+        this._dayView.dayModel.isBefore(this._dateNavigationService.hoveredDay)
+      );
+    } else {
+      return false;
+    }
   }
 }

@@ -13,7 +13,7 @@ import { ClrCommonStringsService } from '../../utils/i18n/common-strings.service
 import { YearRangeModel } from './model/year-range.model';
 import { DateNavigationService } from './providers/date-navigation.service';
 import { DatepickerFocusService } from './providers/datepicker-focus.service';
-import { ViewManagerService } from './providers/view-manager.service';
+import { DatePickerHelperService } from './providers/datepicker-helper.service';
 
 @Component({
   selector: 'clr-yearpicker',
@@ -50,8 +50,17 @@ import { ViewManagerService } from './providers/view-manager.service';
         type="button"
         class="calendar-btn year"
         [attr.tabindex]="getTabIndex(year)"
-        [class.is-selected]="year === calendarYear"
+        [class.is-selected]="year === calendarYear || year === calendarEndYear"
+        [class.is-start-range]="
+          _dateNavigationService.isRangePicker && year === _dateNavigationService.selectedDay?.year
+        "
+        [class.is-end-range]="
+          _dateNavigationService.isRangePicker && year === _dateNavigationService.selectedEndDay?.year
+        "
+        [class.in-range]="isInRange(year)"
+        [class.is-today]="year === currentCalendarYear"
         (click)="changeYear(year)"
+        (mouseenter)="onHover(year)"
       >
         {{ year }}
       </button>
@@ -74,8 +83,8 @@ export class ClrYearpicker implements AfterViewInit {
   private _focusedYear: number;
 
   constructor(
-    private _dateNavigationService: DateNavigationService,
-    private _viewManagerService: ViewManagerService,
+    public _dateNavigationService: DateNavigationService,
+    private datePickerHelperService: DatePickerHelperService,
     private _datepickerFocusService: DatepickerFocusService,
     private _elRef: ElementRef,
     public commonStrings: ClrCommonStringsService
@@ -88,7 +97,20 @@ export class ClrYearpicker implements AfterViewInit {
    * Gets the year which the user is currently on.
    */
   get calendarYear(): number {
-    return this._dateNavigationService.displayedCalendar.year;
+    return this._dateNavigationService.selectedDay?.year
+      ? this._dateNavigationService.selectedDay?.year
+      : this._dateNavigationService.displayedCalendar.year;
+  }
+
+  /**
+   * Gets the year which the user is currently on.
+   */
+  get calendarEndYear(): number {
+    return this._dateNavigationService.selectedEndDay?.year;
+  }
+
+  get currentCalendarYear(): number {
+    return new Date().getFullYear();
   }
 
   /**
@@ -110,16 +132,16 @@ export class ClrYearpicker implements AfterViewInit {
       const key = normalizeKey(event.key);
       if (key === Keys.ArrowUp) {
         event.preventDefault();
-        this.incrementFocusYearBy(-1);
+        this.incrementFocusYearBy(-2);
       } else if (key === Keys.ArrowDown) {
         event.preventDefault();
-        this.incrementFocusYearBy(1);
+        this.incrementFocusYearBy(2);
       } else if (key === Keys.ArrowRight) {
         event.preventDefault();
-        this.incrementFocusYearBy(5);
+        this.incrementFocusYearBy(1);
       } else if (key === Keys.ArrowLeft) {
         event.preventDefault();
-        this.incrementFocusYearBy(-5);
+        this.incrementFocusYearBy(-1);
       }
     }
   }
@@ -129,8 +151,11 @@ export class ClrYearpicker implements AfterViewInit {
    * Also changes the view to the daypicker.
    */
   changeYear(year: number): void {
-    this._dateNavigationService.changeYear(year);
-    this._viewManagerService.changeToDayView();
+    this.datePickerHelperService.selectYear(year);
+  }
+
+  onHover(year: number) {
+    this._dateNavigationService.hoveredYear = year;
   }
 
   /**
@@ -168,6 +193,8 @@ export class ClrYearpicker implements AfterViewInit {
     if (!this.yearRangeModel.inRange(this._focusedYear)) {
       if (this.yearRangeModel.inRange(this.calendarYear)) {
         this._focusedYear = this.calendarYear;
+      } else if (this.yearRangeModel.inRange(this.calendarEndYear)) {
+        this._focusedYear = this.calendarEndYear;
       } else {
         this._focusedYear = this.yearRangeModel.middleYear;
       }
@@ -175,6 +202,18 @@ export class ClrYearpicker implements AfterViewInit {
     return this._focusedYear === year ? 0 : -1;
   }
 
+  isInRange(year: number) {
+    if (!this._dateNavigationService.isRangePicker) {
+      return false;
+    }
+    if (this._dateNavigationService.selectedDay?.year && this.calendarEndYear) {
+      return year > this.calendarYear && year < this.calendarEndYear;
+    } else if (this._dateNavigationService.selectedDay?.year && !this.calendarEndYear) {
+      return year > this.calendarYear && year < this._dateNavigationService.hoveredYear;
+    } else {
+      return false;
+    }
+  }
   /**
    * Increments the focus year by the value passed. Updates the YearRangeModel if the
    * new value is not in the current decade.
