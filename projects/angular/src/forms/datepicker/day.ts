@@ -117,13 +117,13 @@ export class ClrDay {
     }
     if (this._dateNavigationService.selectedDay && this._dateNavigationService.selectedEndDay) {
       return (
-        this._dayView.dayModel.isAfter(this._dateNavigationService.selectedDay) &&
-        this._dayView.dayModel.isBefore(this._dateNavigationService.selectedEndDay)
+        this._dayView.dayModel?.isAfter(this._dateNavigationService.selectedDay) &&
+        this._dayView.dayModel?.isBefore(this._dateNavigationService.selectedEndDay)
       );
     } else if (this._dateNavigationService.selectedDay && !this._dateNavigationService.selectedEndDay) {
       return (
-        this._dayView.dayModel.isAfter(this._dateNavigationService.selectedDay) &&
-        this._dayView.dayModel.isBefore(this._dateNavigationService.hoveredDay)
+        this._dayView.dayModel?.isAfter(this._dateNavigationService.selectedDay) &&
+        this._dayView.dayModel?.isBefore(this._dateNavigationService.hoveredDay)
       );
     } else {
       return false;

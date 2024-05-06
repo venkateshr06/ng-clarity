@@ -16,7 +16,10 @@ import { DateNavigationService } from './providers/date-navigation.service';
   providers: [{ provide: NG_VALIDATORS, useExisting: ClrDateInputValidator, multi: true }],
 })
 export class ClrDateInputValidator implements Validator {
-  constructor(@Optional() private dateIOService: DateIOService, private dateNavigationService: DateNavigationService) {}
+  constructor(
+    @Optional() private dateIOService: DateIOService,
+    @Optional() private dateNavigationService: DateNavigationService
+  ) {}
 
   validate(control: AbstractControl): ValidationErrors {
     if (this.dateIOService) {
@@ -28,6 +31,7 @@ export class ClrDateInputValidator implements Validator {
       } else if (value && value > this.dateIOService.disabledDates.maxDate.toDate()) {
         return { max: { max: maxDate.toLocaleDateString(), actual: value.toLocaleDateString() } };
       } else if (
+        this.dateNavigationService &&
         this.dateNavigationService.isRangePicker &&
         this.dateNavigationService.selectedDay &&
         this.dateNavigationService.selectedEndDay &&
@@ -46,13 +50,17 @@ export class ClrDateInputValidator implements Validator {
   providers: [{ provide: NG_VALIDATORS, useExisting: ClrDateRangeStartInputValidator, multi: true }],
 })
 export class ClrDateRangeStartInputValidator implements Validator {
-  constructor(@Optional() private dateIOService: DateIOService, private dateNavigationService: DateNavigationService) {}
+  constructor(
+    @Optional() private dateIOService: DateIOService,
+    @Optional() private dateNavigationService: DateNavigationService
+  ) {}
 
   validate(control: AbstractControl): ValidationErrors {
     if (this.dateIOService) {
       const value = this.dateIOService.getDateValueFromDateString(control.value);
       if (
         value &&
+        this.dateNavigationService &&
         this.dateNavigationService.selectedEndDay &&
         value > this.dateNavigationService.selectedEndDay.toDate()
       ) {
@@ -69,12 +77,20 @@ export class ClrDateRangeStartInputValidator implements Validator {
   providers: [{ provide: NG_VALIDATORS, useExisting: ClrDateRangeEndInputValidator, multi: true }],
 })
 export class ClrDateRangeEndInputValidator implements Validator {
-  constructor(@Optional() private dateIOService: DateIOService, private dateNavigationService: DateNavigationService) {}
+  constructor(
+    @Optional() private dateIOService: DateIOService,
+    @Optional() private dateNavigationService: DateNavigationService
+  ) {}
 
   validate(control: AbstractControl): ValidationErrors {
     if (this.dateIOService) {
       const value = this.dateIOService.getDateValueFromDateString(control.value);
-      if (value && this.dateNavigationService.selectedDay && value < this.dateNavigationService.selectedDay.toDate()) {
+      if (
+        value &&
+        this.dateNavigationService &&
+        this.dateNavigationService.selectedDay &&
+        value < this.dateNavigationService.selectedDay.toDate()
+      ) {
         return { range: { range: true } };
       }
     }
