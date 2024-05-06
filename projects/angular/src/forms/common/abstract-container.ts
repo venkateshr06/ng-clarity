@@ -90,7 +90,7 @@ export abstract class ClrAbstractContainer implements DynamicWrapper, OnDestroy,
   }
 
   private get touched() {
-    return this.control?.touched || this.secondaryControl?.touched;
+    return !!(this.control?.touched || this.secondaryControl?.touched);
   }
 
   ngAfterContentInit() {

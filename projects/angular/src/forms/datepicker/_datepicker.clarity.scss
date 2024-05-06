@@ -90,25 +90,25 @@
 }
 
 @include mixins.exports('datepicker.clarity') {
+  // .datepicker {
+  //   display: flex;
+  //   flex-direction: column;
+
+  //   //Dimensions
+  //   margin-top: datepicker-variables.$clr-calendar-margin-top;
+  //   padding: datepicker-variables.$clr-calendar-padding;
+  //   width: datepicker-variables.$clr-calendar-width;
+  //   height: datepicker-variables.$clr-calendar-height;
+
+  //   //Other Props
+  //   background: datepicker-variables.$clr-calendar-background-color;
+  //   border: tokens.$cds-alias-object-border-width-100 solid datepicker-variables.$clr-calendar-border-color;
+  //   border-radius: tokens.$cds-alias-object-border-radius-100;
+  //   box-shadow: tokens.$cds-alias-object-shadow-100;
+  //   overflow: hidden;
+  //   z-index: map.get(variables.$clr-layers, dropdown-menu);
+  // }
   .datepicker {
-    display: flex;
-    flex-direction: column;
-
-    //Dimensions
-    margin-top: datepicker-variables.$clr-calendar-margin-top;
-    padding: datepicker-variables.$clr-calendar-padding;
-    width: datepicker-variables.$clr-calendar-width;
-    height: datepicker-variables.$clr-calendar-height;
-
-    //Other Props
-    background: datepicker-variables.$clr-calendar-background-color;
-    border: tokens.$cds-alias-object-border-width-100 solid datepicker-variables.$clr-calendar-border-color;
-    border-radius: tokens.$cds-alias-object-border-radius-100;
-    box-shadow: tokens.$cds-alias-object-shadow-100;
-    overflow: hidden;
-    z-index: map.get(variables.$clr-layers, dropdown-menu);
-  }
-  .datepicker-view-manager-wrapper {
     display: flex;
     flex-direction: row;
     margin-top: var(--cds-global-space-4);
@@ -117,8 +117,7 @@
     height: datepicker-variables.$clr-calendar-height;
     background: var(--clr-calendar-background-color);
     border: var(--cds-alias-object-border-width-100) solid var(--clr-calendar-border-color);
-    border-top-left-radius: var(--cds-alias-object-border-radius-100);
-    border-bottom-left-radius: var(--cds-alias-object-border-radius-100);
+    border-radius: var(--cds-alias-object-border-radius-100);
     box-shadow: var(--cds-alias-object-shadow-100);
     // overflow: hidden;
     z-index: 1050;
@@ -134,6 +133,8 @@
     //  border-right: 1px solid tokens.$cds-alias-object-border-color;
     padding: var(--cds-global-space-3) 0;
     flex-shrink: 0;
+    border-top-left-radius: var(--cds-alias-object-border-radius-100);
+    border-bottom-left-radius: var(--cds-alias-object-border-radius-100);
     .range-option {
       padding: var(--cds-global-space-5);
       padding-left: var(--cds-global-space-7);

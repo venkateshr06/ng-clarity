@@ -239,12 +239,31 @@ export class DateIOService {
     const m: any = /^-?[0-9]+$/.test(month + '') ? +month - 1 : +this.monthNumberFromString(month) - 1;
     // const m: any = +month - 1; // month is 0 based
     const d: number = +date;
-    if ((m >= 0 && !this.isValidMonth(m)) || (d >= 0 && !this.isValidDate(y, m, d))) {
+    if (
+      (this.isMonthViewAllowed() && !this.isValidMonth(m)) ||
+      (this.isDayViewAllowed() && !this.isValidDate(y, m, d))
+    ) {
       return null;
     }
-    const result: number = parseToFourDigitYear(y) || new Date().getFullYear();
-    // return result !== -1 ? new Date(result , m || 0, d || 1) : null;
-    return new Date(result, m || 0, d || 1);
+
+    const yr: number = parseToFourDigitYear(y);
+    if (this.isYearViewAllowed() && yr === -1) {
+      return null;
+    }
+    // const result = isNaN(m) && isNaN(d) && (isNaN(yr) || yr === -1);
+    // console.log(
+    //   '🚀 ~ DateIOService ~ validateAndGetDate ~ result:',
+    //   result,
+    //   m,
+    //   isNaN(m),
+    //   d,
+    //   isNaN(d),
+    //   isNaN(yr) || yr === -1
+    // );
+    // if (result) {
+    //   return null;
+    // }
+    return new Date(yr || new Date().getFullYear(), m || 0, d || 1);
   }
 
   private validateDateRangeOptions(rangeOptions: DateRangeOption[]): DateRangeOption[] {

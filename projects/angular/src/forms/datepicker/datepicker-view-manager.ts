@@ -4,7 +4,7 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 
-import { Component } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 
 import { ClrCommonStringsService } from '../../utils/i18n/common-strings.service';
 import { DateIOService } from './providers/date-io.service';
@@ -18,6 +18,8 @@ import { ViewManagerService } from './providers/view-manager.service';
   templateUrl: './datepicker-view-manager.html',
   providers: [DatepickerFocusService],
   host: {
+    '[class.datepicker]': 'true',
+    '[class.has-range-option]': 'hasRangeOptions',
     '[attr.aria-modal]': 'true',
     '[attr.aria-label]': 'commonStrings.keys.datepickerDialogLabel',
     role: 'dialog',
@@ -29,9 +31,9 @@ export class ClrDatepickerViewManager {
   constructor(
     public commonStrings: ClrCommonStringsService,
     private viewManagerService: ViewManagerService,
-    public dateIOService: DateIOService,
-    private datePickerHelperService: DatePickerHelperService,
-    public dateNavigationService: DateNavigationService
+    private dateIOService: DateIOService,
+    @Optional() private datePickerHelperService: DatePickerHelperService,
+    private dateNavigationService: DateNavigationService
   ) {}
 
   /**
@@ -55,9 +57,13 @@ export class ClrDatepickerViewManager {
     return this.viewManagerService.isDayView;
   }
 
+  get hasRangeOptions() {
+    return this.dateNavigationService && this.dateNavigationService.isRangePicker && this.dateRangeOptions?.length;
+  }
+
   onRangeOptionSelect(selectedRange) {
     selectedRange?.value?.forEach(date => {
-      this.datePickerHelperService.selectDay(this.datePickerHelperService.convertDateToDayModel(date));
+      this.datePickerHelperService?.selectDay(this.datePickerHelperService.convertDateToDayModel(date));
     });
   }
 }

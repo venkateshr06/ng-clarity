@@ -9,6 +9,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { ClrDatepickerModule } from './datepicker.module';
+import { DateNavigationService } from './providers/date-navigation.service';
 
 @Component({
   template: `
@@ -29,6 +30,7 @@ export default function () {
       TestBed.configureTestingModule({
         imports: [ReactiveFormsModule, ClrDatepickerModule],
         declarations: [TestComponent],
+        providers: [DateNavigationService],
       });
 
       fixture = TestBed.createComponent(TestComponent);

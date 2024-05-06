@@ -6,6 +6,8 @@
 
 import { formatDate, WeekDay } from '@angular/common';
 
+import { DELIMITERS_REGEX } from './constants';
+
 /**
  * Returns the number of days in a month.
  */
@@ -60,9 +62,8 @@ export function getFormatDate(date: string | Date, format: string, delimiter: st
 }
 
 export function extractDateParts(date: string, format: string) {
-  const regex = /[-\\/.\s]/;
-  const dateParts = date?.split(regex);
-  const formatParts = format?.split(regex);
+  const dateParts = date?.split(DELIMITERS_REGEX);
+  const formatParts = format?.split(DELIMITERS_REGEX);
   const monthIndex = formatParts.findIndex(pt => /m./i.test(pt));
   const dateIndex = formatParts.findIndex(pt => /d./i.test(pt));
   const yearIndex = formatParts.findIndex(pt => /y./i.test(pt));
