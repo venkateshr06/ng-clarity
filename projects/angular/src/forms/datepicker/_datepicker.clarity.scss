@@ -34,8 +34,9 @@
     background: datepicker-variables.$clr-calendar-btn-hover-color;
   }
   &.in-range {
-    border-radius: 0;
-    border: none !important;
+    &:not(.is-today) {
+      border-radius: 0;
+    }
     background: datepicker-variables.$clr-calendar-in-range-cell-border-color;
   }
   &:focus {
@@ -142,7 +143,8 @@
       cursor: pointer;
       &.active {
         border-left: 3px solid datepicker-variables.$clr-calendar-active-option-border-color;
-        background-color: #fff !important;
+        color: var(--clr-vertical-nav-item-active-color);
+        background-color: var(--clr-vertical-nav-selected-bg-color);
       }
       + .range-option {
         margin: var(--cds-global-space-5) 0;
