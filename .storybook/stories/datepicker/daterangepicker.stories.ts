@@ -25,10 +25,7 @@ export default {
     clrRangeEndDate: { control: { type: 'date' } },
     max: { control: { type: 'date' } },
     min: { control: { type: 'date' } },
-    dateFormat: { defaultValue: 'dd-MM-yyyy' },
-    disabled: { defaultValue: false, control: { type: 'boolean' } },
-    placeholder: { defaultValue: '' },
-    id: { defaultValue: '' },
+    disabled: { control: { type: 'boolean' } },
     // outputs
     clrRangeStartDateChange: { control: { disable: true } },
     clrRangeEndDateChange: { control: { disable: true } },
@@ -42,6 +39,10 @@ export default {
     getDateString: { control: { disable: true }, table: { disable: true } },
   },
   args: {
+    disabled: false,
+    dateFormat: 'MM-dd-yyyy',
+    placeholder: '',
+    id: '',
     // outputs
     clrRangeStartDateChange: action('clrRangeStartDateChange'),
     clrRangeEndDateChange: action('clrRangeEndDateChange'),
