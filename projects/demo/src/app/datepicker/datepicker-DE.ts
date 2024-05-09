@@ -13,6 +13,9 @@ import { Component, LOCALE_ID } from '@angular/core';
   template: `
     <div clrForm>
       <input type="date" autocomplete="off" clrDate />
+      <clr-date-container [dateFormat]="'dd/MMMM/yyyy'">
+        <input type="date" autocomplete="off" clrDate />
+      </clr-date-container>
     </div>
   `,
   providers: [{ provide: LOCALE_ID, useValue: 'de' }],

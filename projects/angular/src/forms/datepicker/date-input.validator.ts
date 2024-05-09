@@ -12,14 +12,11 @@ import { DateIOService } from './providers/date-io.service';
 import { DateNavigationService } from './providers/date-navigation.service';
 
 @Directive({
-  selector: '[clrDate], [clrRangeStartDate], [clrRangeEndDate]',
+  selector: '[clrDate]',
   providers: [{ provide: NG_VALIDATORS, useExisting: ClrDateInputValidator, multi: true }],
 })
 export class ClrDateInputValidator implements Validator {
-  constructor(
-    @Optional() private dateIOService: DateIOService,
-    @Optional() private dateNavigationService: DateNavigationService
-  ) {}
+  constructor(@Optional() private dateIOService: DateIOService) {}
 
   validate(control: AbstractControl): ValidationErrors {
     if (this.dateIOService) {
@@ -30,14 +27,6 @@ export class ClrDateInputValidator implements Validator {
         return { min: { min: minDate.toLocaleDateString(), actual: value.toLocaleDateString() } };
       } else if (value && value > this.dateIOService.disabledDates.maxDate.toDate()) {
         return { max: { max: maxDate.toLocaleDateString(), actual: value.toLocaleDateString() } };
-      } else if (
-        this.dateNavigationService &&
-        this.dateNavigationService.isRangePicker &&
-        this.dateNavigationService.selectedDay &&
-        this.dateNavigationService.selectedEndDay &&
-        this.dateNavigationService.selectedDay.toDate() > this.dateNavigationService.selectedEndDay.toDate()
-      ) {
-        return { range: { range: true } };
       }
     }
 
@@ -58,7 +47,13 @@ export class ClrDateRangeStartInputValidator implements Validator {
   validate(control: AbstractControl): ValidationErrors {
     if (this.dateIOService) {
       const value = this.dateIOService.getDateValueFromDateString(control.value);
-      if (
+      const minDate = this.dateIOService.disabledDates.minDate.toDate();
+      const maxDate = this.dateIOService.disabledDates.maxDate.toDate();
+      if (value && value < this.dateIOService.disabledDates.minDate.toDate()) {
+        return { min: { min: minDate.toLocaleDateString(), actual: value.toLocaleDateString() } };
+      } else if (value && value > this.dateIOService.disabledDates.maxDate.toDate()) {
+        return { max: { max: maxDate.toLocaleDateString(), actual: value.toLocaleDateString() } };
+      } else if (
         value &&
         this.dateNavigationService &&
         this.dateNavigationService.selectedEndDay &&
@@ -85,7 +80,13 @@ export class ClrDateRangeEndInputValidator implements Validator {
   validate(control: AbstractControl): ValidationErrors {
     if (this.dateIOService) {
       const value = this.dateIOService.getDateValueFromDateString(control.value);
-      if (
+      const minDate = this.dateIOService.disabledDates.minDate.toDate();
+      const maxDate = this.dateIOService.disabledDates.maxDate.toDate();
+      if (value && value < this.dateIOService.disabledDates.minDate.toDate()) {
+        return { min: { min: minDate.toLocaleDateString(), actual: value.toLocaleDateString() } };
+      } else if (value && value > this.dateIOService.disabledDates.maxDate.toDate()) {
+        return { max: { max: maxDate.toLocaleDateString(), actual: value.toLocaleDateString() } };
+      } else if (
         value &&
         this.dateNavigationService &&
         this.dateNavigationService.selectedDay &&
