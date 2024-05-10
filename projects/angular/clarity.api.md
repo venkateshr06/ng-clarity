@@ -2041,13 +2041,13 @@ export class ClrDateInputBase extends WrappedFormControl<ClrDateContainer> imple
 
 // @public (undocumented)
 export class ClrDateInputValidator implements Validator {
-    constructor(dateIOService: DateIOService, dateNavigationService: DateNavigationService);
+    constructor(dateIOService: DateIOService);
     // (undocumented)
     validate(control: AbstractControl): ValidationErrors;
     // (undocumented)
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ClrDateInputValidator, "[clrDate], [clrRangeStartDate], [clrRangeEndDate]", never, {}, {}, never, never, false, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ClrDateInputValidator, "[clrDate]", never, {}, {}, never, never, false, never>;
     // (undocumented)
-    static ɵfac: i0.ɵɵFactoryDeclaration<ClrDateInputValidator, [{ optional: true; }, { optional: true; }]>;
+    static ɵfac: i0.ɵɵFactoryDeclaration<ClrDateInputValidator, [{ optional: true; }]>;
 }
 
 // @public (undocumented)
