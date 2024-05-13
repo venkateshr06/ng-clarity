@@ -167,14 +167,22 @@ export class DateNavigationService {
     this._focusOnCalendarChange.next();
   }
 
-  setSelectedDay(dayModel: DayModel | undefined) {
+  setSelectedDay(dayModel: DayModel | undefined): void {
     this.selectedDay = dayModel;
+    this.updateDisplayedCalendarOnDaySelection(dayModel);
     this._selectedDayChange.next(dayModel);
   }
 
-  setSelectedEndDay(dayModel: DayModel | undefined) {
+  setSelectedEndDay(dayModel: DayModel | undefined): void {
     this.selectedEndDay = dayModel;
+    this.updateDisplayedCalendarOnDaySelection(dayModel);
     this._selectedEndDayChange.next(dayModel);
+  }
+
+  updateDisplayedCalendarOnDaySelection(day: DayModel | undefined): void {
+    if (day && !this._displayedCalendar.isDayInCalendar(day)) {
+      this.setDisplayedCalendar(new CalendarModel(day.year, day.month));
+    }
   }
 
   validateDateRange() {

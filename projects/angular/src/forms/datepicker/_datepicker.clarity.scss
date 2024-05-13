@@ -37,7 +37,9 @@
     &:not(.is-today) {
       border-radius: 0;
     }
-    background: datepicker-variables.$clr-calendar-in-range-cell-border-color;
+    &:not(.is-excluded) {
+      background: datepicker-variables.$clr-calendar-in-range-cell-border-color;
+    }
   }
   &:focus {
     border: 1px solid datepicker-variables.$clr-calendar-btn-focus-border-color !important;

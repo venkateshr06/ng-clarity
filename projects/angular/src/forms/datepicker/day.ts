@@ -86,7 +86,7 @@ export class ClrDay {
    */
   @HostListener('mouseenter')
   hoverListener(): void {
-    if (!this.dayView.isExcluded && !this.dayView.isDisabled) {
+    if (!this.dayView.isDisabled) {
       this._dateNavigationService.hoveredDay = this.dayView.dayModel;
     }
   }
