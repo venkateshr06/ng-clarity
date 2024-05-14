@@ -4,6 +4,7 @@
  * The full license information can be found in LICENSE in the root directory of this project.
  */
 @use '@cds/core/tokens/tokens.scss';
+@use '../../utils/mixins';
 
 $clr-calendar-click-target: #{tokens.$cds-global-space-11};
 $clr-calendar-background-color: var(--clr-calendar-background-color) !default;
@@ -16,7 +17,7 @@ $clr-calendar-width: calc(
   calc(7 * #{tokens.$cds-global-space-11}) + calc(2 * #{tokens.$cds-global-space-7}) +
     calc(2 * #{tokens.$cds-alias-object-border-width-100})
 );
-$clr-calendar-options-width: 150px;
+$clr-calendar-options-width: mixins.baselinePx(150);
 
 //(8 = 6 date rows + 1 row for day heading + 1 row for calendar switches and month/year pickers) + 2 * 16px padding + 2px for border
 $clr-calendar-height: calc(

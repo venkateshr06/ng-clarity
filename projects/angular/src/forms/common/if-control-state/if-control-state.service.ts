@@ -77,8 +77,6 @@ export class IfControlStateService implements OnDestroy {
         finalStatus = CONTROL_STATE.VALID;
       }
       this._statusChanges.next(finalStatus);
-      // combinedStatus.findIndex((status) => status === CONTROL_STATE.INVALID) > -1 ? CONTROL_STATE.INVALID
-      // this._statusChanges.next(['VALID', 'INVALID'].includes(status) ? status : CONTROL_STATE.NONE);
     }
   }
 }

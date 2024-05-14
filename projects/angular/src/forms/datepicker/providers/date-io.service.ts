@@ -132,18 +132,7 @@ export class DateIOService {
       if (isNaN(date.getTime())) {
         return '';
       }
-      // const dateNo: number = date.getDate();
-      // const monthNo: number = date.getMonth() + 1;
-      // const dateStr: string = dateNo > 9 ? dateNo.toString() : '0' + dateNo;
-      // const monthStr: string = monthNo > 9 ? monthNo.toString() : '0' + monthNo;
       return getFormatDate(date, this.localeDisplayFormat.format, this.delimiter);
-      // if (this.localeDisplayFormat === LITTLE_ENDIAN) {
-      //   return dateStr + this.delimiter + monthStr + this.delimiter + date.getFullYear();
-      // } else if (this.localeDisplayFormat === MIDDLE_ENDIAN) {
-      //   return monthStr + this.delimiter + dateStr + this.delimiter + date.getFullYear();
-      // } else {
-      //   return date.getFullYear() + this.delimiter + monthStr + this.delimiter + dateStr;
-      // }
     }
     return '';
   }
@@ -154,21 +143,6 @@ export class DateIOService {
     }
     const dateParts: string[] = extractDateParts(date, this.localeDisplayFormat.format);
     return this.validateAndGetDate(dateParts[0], dateParts[1], dateParts[2]);
-    // const dateParts: string[] = date.match(USER_INPUT_REGEX);
-    // if (!dateParts || dateParts.length !== 3) {
-    //   return null;
-    // }
-    // const [firstPart, secondPart, thirdPart] = dateParts;
-    // if (this.localeDisplayFormat === LITTLE_ENDIAN) {
-    //   // secondPart is month && firstPart is date
-    //   return this.validateAndGetDate(thirdPart, secondPart, firstPart);
-    // } else if (this.localeDisplayFormat === MIDDLE_ENDIAN) {
-    //   // firstPart is month && secondPart is date
-    //   return this.validateAndGetDate(thirdPart, firstPart, secondPart);
-    // } else {
-    //   // secondPart is month && thirdPart is date
-    //   return this.validateAndGetDate(firstPart, secondPart, thirdPart);
-    // }
   }
 
   private initializeLocaleDisplayFormat(): void {
@@ -192,7 +166,6 @@ export class DateIOService {
       // Sanitize Date Format. Remove RTL characters.
       // FIXME: When we support RTL, remove this and handle it correctly.
       const localeFormat: string = this.cldrLocaleDateFormat.replace(RTL_REGEX, '');
-      // const delimiters: string[] = localeFormat.split(DELIMITER_REGEX);
       const delimiters: string[] = localeFormat.match(DELIMITERS_REGEX) || [];
       this.delimiter = delimiters[0] || '';
     }
@@ -229,15 +202,8 @@ export class DateIOService {
     // the below if statement. The error is:
     // Operator '!==' cannot be applied to types '2' and '4'
     // More info here: https://github.com/Microsoft/TypeScript/issues/12794#issuecomment-270342936
-    /*
-    if (year.length !== 2 || year.length !== 4) {
-      return null;
-    }
-    */
     const y: number = +year;
-    // const m: any = typeof month === 'string' ? +this.monthNumberFromString(+month) - 1 : +month - 1; // month is 0 based
     const m: any = /^-?[0-9]+$/.test(month + '') ? +month - 1 : +this.monthNumberFromString(month) - 1;
-    // const m: any = +month - 1; // month is 0 based
     const d: number = +date;
     if (
       (this.isMonthViewAllowed() && !this.isValidMonth(m)) ||
@@ -250,19 +216,6 @@ export class DateIOService {
     if (this.isYearViewAllowed() && yr === -1) {
       return null;
     }
-    // const result = isNaN(m) && isNaN(d) && (isNaN(yr) || yr === -1);
-    // console.log(
-    //   '🚀 ~ DateIOService ~ validateAndGetDate ~ result:',
-    //   result,
-    //   m,
-    //   isNaN(m),
-    //   d,
-    //   isNaN(d),
-    //   isNaN(yr) || yr === -1
-    // );
-    // if (result) {
-    //   return null;
-    // }
     return new Date(yr || new Date().getFullYear(), m || 0, d || 1);
   }
 

@@ -30,7 +30,7 @@ import {
 } from './date-input.validator';
 import { ClrDateRangeEndInput } from './date-range-end-input';
 import { ClrDateRangeStartInput } from './date-range-start-input';
-import { ClrDateSingleInput } from './date-single-input';
+import { ClrDateInput } from './date-single-input';
 import { ClrDatepickerViewManager } from './datepicker-view-manager';
 import { ClrDay } from './day';
 import { ClrDaypicker } from './daypicker';
@@ -40,7 +40,7 @@ import { ClrYearpicker } from './yearpicker';
 export const CLR_DATEPICKER_DIRECTIVES: Type<any>[] = [
   ClrDay,
   ClrDateContainer,
-  ClrDateSingleInput,
+  ClrDateInput,
   ClrDateRangeStartInput,
   ClrDateRangeEndInput,
   ClrDateInputValidator,
