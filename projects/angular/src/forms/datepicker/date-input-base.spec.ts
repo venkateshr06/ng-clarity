@@ -22,7 +22,7 @@ import { LayoutService } from '../common/providers/layout.service';
 import { NgControlService } from '../common/providers/ng-control.service';
 import { ClrFormsModule } from '../forms.module';
 import { ClrDateContainer } from './date-container';
-import { ClrDateSingleInput } from './date-single-input';
+import { ClrDateInput } from './date-single-input';
 import { DayModel } from './model/day.model';
 import { DateFormControlService } from './providers/date-form-control.service';
 import { DateIOService } from './providers/date-io.service';
@@ -35,7 +35,7 @@ import { ViewManagerService } from './providers/view-manager.service';
 
 export default function () {
   describe('Date Input Component', () => {
-    let context: TestContext<ClrDateSingleInput, TestComponent>;
+    let context: TestContext<ClrDateInput, TestComponent>;
     let enabledService: MockDatepickerEnabledService;
     let dateIOService: DateIOService;
     let dateNavigationService: DateNavigationService;
@@ -69,7 +69,7 @@ export default function () {
           },
         });
 
-        context = this.create(ClrDateSingleInput, TestComponent, DATEPICKER_PROVIDERS);
+        context = this.create(ClrDateInput, TestComponent, DATEPICKER_PROVIDERS);
         enabledService = context.fixture.debugElement
           .query(By.directive(ClrDateContainer))
           .injector.get(DatepickerEnabledService) as MockDatepickerEnabledService;
@@ -201,26 +201,6 @@ export default function () {
           context.detectChanges();
           expect(context.clarityDirective.inputType).toBe('date');
         });
-
-        // it('sets the selectedDay if the value of the input is valid', () => {
-        //   const testEl = document.createElement('INPUT') as HTMLInputElement;
-        //   testEl.value = '01/02/2015';
-
-        //   expect(dateNavigationService.selectedDay).toBeNull(); // TestComponent is <input clrDate>. null Input
-
-        //   context.clarityDirective.onValueChange(testEl);
-        //   expect(dateNavigationService.selectedDay).toEqual(new DayModel(2015, 0, 2));
-        // });
-
-        // it('sets the selectedDay to a null if the value of the input is invalid', () => {
-        //   const testEl = document.createElement('INPUT') as HTMLInputElement;
-        //   testEl.value = '01/02/201';
-
-        //   expect(dateNavigationService.selectedDay).toBeNull();
-        //   context.clarityDirective.onValueChange(testEl);
-
-        //   expect(dateNavigationService.selectedDay).toBeNull();
-        // });
 
         it('outputs the date when the user selects a Date from the Date Picker', () => {
           expect(context.testComponent.date).toBeUndefined();
@@ -364,7 +344,7 @@ export default function () {
         fixture.detectChanges();
 
         dateContainerDebugElement = fixture.debugElement.query(By.directive(ClrDateContainer));
-        dateInputDebugElement = fixture.debugElement.query(By.directive(ClrDateSingleInput));
+        dateInputDebugElement = fixture.debugElement.query(By.directive(ClrDateInput));
         dateNavigationService = dateContainerDebugElement.injector.get(DateNavigationService);
       });
 
@@ -449,7 +429,7 @@ export default function () {
           },
         });
 
-        context = this.create(ClrDateSingleInput, TestComponentWithReactiveForms, DATEPICKER_PROVIDERS);
+        context = this.create(ClrDateInput, TestComponentWithReactiveForms, DATEPICKER_PROVIDERS);
 
         datepickerFocusService = context.fixture.debugElement.injector.get(DatepickerFocusService);
         enabledService = context.fixture.debugElement
@@ -488,7 +468,7 @@ export default function () {
         fixture.detectChanges();
 
         dateContainerDebugElement = fixture.debugElement.query(By.directive(ClrDateContainer));
-        dateInputDebugElement = fixture.debugElement.query(By.directive(ClrDateSingleInput));
+        dateInputDebugElement = fixture.debugElement.query(By.directive(ClrDateInput));
         dateNavigationService = dateContainerDebugElement.injector.get(DateNavigationService);
         dateFormControlService = dateContainerDebugElement.injector.get(DateFormControlService);
       });
@@ -651,7 +631,7 @@ export default function () {
         fixture.detectChanges();
 
         dateContainerDebugElement = fixture.debugElement.query(By.directive(ClrDateContainer));
-        dateInputDebugElement = fixture.debugElement.query(By.directive(ClrDateSingleInput));
+        dateInputDebugElement = fixture.debugElement.query(By.directive(ClrDateInput));
         dateNavigationService = dateContainerDebugElement.injector.get(DateNavigationService);
       });
 
@@ -808,7 +788,7 @@ class TestComponent {
 class TestComponentWithNgModel {
   dateValue: string;
 
-  @ViewChild(ClrDateSingleInput) dateInputInstance: ClrDateSingleInput;
+  @ViewChild(ClrDateInput) dateInputInstance: ClrDateInput;
 }
 
 @Component({

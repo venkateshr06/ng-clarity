@@ -179,12 +179,6 @@ export class CalendarViewModel {
   private initializeSelectedDay(): void {
     this.setSelectedDay(this.selectedDay, true);
     this.setSelectedDay(this.selectedEndDay, true);
-    // if (this.selectedDay && this.isDayInCalendarView(this.selectedDay)) {
-    //   this.currMonthDayViews[this.selectedDay.date - 1].isSelected = true;
-    // }
-    // if (this.selectedEndDay && this.isDayInCalendarView(this.selectedEndDay)) {
-    //   this.currMonthDayViews[this.selectedEndDay.date - 1].isSelected = true;
-    // }
   }
 
   /**

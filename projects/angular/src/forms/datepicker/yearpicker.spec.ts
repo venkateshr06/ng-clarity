@@ -48,7 +48,6 @@ export default function () {
           DateIOService,
           DateFormControlService,
         ]);
-        // context.clarityElement = context.clarityElement.querySelector('.datepicker-view-manager');
       });
 
       it('renders the year range', () => {

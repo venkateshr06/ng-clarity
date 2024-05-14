@@ -21,7 +21,7 @@ import { datesAreEqual } from './utils/date-utils';
   },
   providers: [DatepickerFocusService],
 })
-export class ClrDateSingleInput extends ClrDateInputBase implements AfterViewInit {
+export class ClrDateInput extends ClrDateInputBase implements AfterViewInit {
   @Output('clrDateChange') dateChange = new EventEmitter<Date>(false);
 
   private initialClrDateInputValue: Date;

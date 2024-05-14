@@ -35,7 +35,6 @@ import { DateIOService } from './providers/date-io.service';
 import { DateNavigationService } from './providers/date-navigation.service';
 import { DatepickerEnabledService } from './providers/datepicker-enabled.service';
 import { DatepickerFocusService } from './providers/datepicker-focus.service';
-// import { datesAreEqual } from './utils/date-utils';
 
 // There are four ways the datepicker value is set
 // 1. Value set by user typing into text input as a string ex: '01/28/2015'
@@ -128,7 +127,6 @@ export class ClrDateInputBase extends WrappedFormControl<ClrDateContainer> imple
     // I need the renderer to set the value property on the input to make sure that if the user has supplied a Date
     // input object, we reflect it with the right date on the input field using the IO service. I am not sure if
     // these are major issues or not but just noting them down here.
-    // this.processInitialInputs();
   }
 
   @HostListener('focus')
@@ -165,7 +163,6 @@ export class ClrDateInputBase extends WrappedFormControl<ClrDateContainer> imple
       this.validateDateRange();
     } else {
       this.renderer.setProperty(this.el.nativeElement, 'value', '');
-      // this.control?.control?.setValue(null, { emitEvent: false });
     }
   }
 
