@@ -20,9 +20,6 @@ export class DatepickerInReactiveForms {
     endDate: new FormControl(),
   });
 
-  minDate = '2023-02-05';
-  maxDate = '2026-02-22';
-
   dateChanged(date: Date) {
     console.log(date);
   }
@@ -33,9 +30,5 @@ export class DatepickerInReactiveForms {
 
   endDateChanged(date: Date) {
     console.log(date);
-  }
-
-  ngOnInit() {
-    // this.dateForm.get('date').patchValue('02/02/2024')
   }
 }

@@ -1991,6 +1991,26 @@ export class ClrDateContainer extends ClrAbstractContainer implements AfterViewI
 }
 
 // @public (undocumented)
+export class ClrDateInput extends ClrDateInputBase implements AfterViewInit {
+    // (undocumented)
+    set date(date: Date | string);
+    // (undocumented)
+    dateChange: EventEmitter<Date>;
+    // (undocumented)
+    ngAfterViewInit(): void;
+    // (undocumented)
+    ngOnInit(): void;
+    // (undocumented)
+    onValueChange(target: HTMLInputElement): void;
+    // (undocumented)
+    protected updateDate(value: Date, setByUserInteraction?: boolean, fieldName?: string): void;
+    // (undocumented)
+    static ɵdir: i0.ɵɵDirectiveDeclaration<ClrDateInput, "[clrDate]", never, { "date": "clrDate"; }, { "dateChange": "clrDateChange"; }, never, never, false, never>;
+    // (undocumented)
+    static ɵfac: i0.ɵɵFactoryDeclaration<ClrDateInput, never>;
+}
+
+// @public (undocumented)
 export class ClrDateInputBase extends WrappedFormControl<ClrDateContainer> implements OnInit, AfterViewInit, OnDestroy {
     constructor(viewContainerRef: ViewContainerRef, injector: Injector, el: ElementRef, renderer: Renderer2, document: any, control: NgControl, container: ClrDateContainer, dateIOService: DateIOService, dateNavigationService: DateNavigationService, datepickerEnabledService: DatepickerEnabledService, dateFormControlService: DateFormControlService, platformId: any, focusService: FocusService_2, datepickerFocusService: DatepickerFocusService);
     // (undocumented)
@@ -2082,7 +2102,7 @@ export class ClrDatepickerModule {
     // Warning: (ae-forgotten-export) The symbol "i11_2" needs to be exported by the entry point index.d.ts
     //
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<ClrDatepickerModule, [typeof i1_18.ClrDay, typeof i2_12.ClrDateContainer, typeof i3_12.ClrDateSingleInput, typeof i4_8.ClrDateRangeStartInput, typeof i5_6.ClrDateRangeEndInput, typeof i6_6.ClrDateInputValidator, typeof i6_6.ClrDateRangeStartInputValidator, typeof i6_6.ClrDateRangeEndInputValidator, typeof i7_4.ClrDatepickerViewManager, typeof i8_4.ClrMonthpicker, typeof i9_4.ClrYearpicker, typeof i10_3.ClrDaypicker, typeof i11_2.ClrCalendar], [typeof i6.CommonModule, typeof i38.CdkTrapFocusModule, typeof i7_3.ClrHostWrappingModule, typeof i6_2.ClrConditionalModule, typeof i16_2.ClrPopoverModuleNext, typeof i3_2.ClrIconModule, typeof i2_6.ClrCommonFormsModule], [typeof i1_18.ClrDay, typeof i2_12.ClrDateContainer, typeof i3_12.ClrDateSingleInput, typeof i4_8.ClrDateRangeStartInput, typeof i5_6.ClrDateRangeEndInput, typeof i6_6.ClrDateInputValidator, typeof i6_6.ClrDateRangeStartInputValidator, typeof i6_6.ClrDateRangeEndInputValidator, typeof i7_4.ClrDatepickerViewManager, typeof i8_4.ClrMonthpicker, typeof i9_4.ClrYearpicker, typeof i10_3.ClrDaypicker, typeof i11_2.ClrCalendar]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<ClrDatepickerModule, [typeof i1_18.ClrDay, typeof i2_12.ClrDateContainer, typeof i3_12.ClrDateInput, typeof i4_8.ClrDateRangeStartInput, typeof i5_6.ClrDateRangeEndInput, typeof i6_6.ClrDateInputValidator, typeof i6_6.ClrDateRangeStartInputValidator, typeof i6_6.ClrDateRangeEndInputValidator, typeof i7_4.ClrDatepickerViewManager, typeof i8_4.ClrMonthpicker, typeof i9_4.ClrYearpicker, typeof i10_3.ClrDaypicker, typeof i11_2.ClrCalendar], [typeof i6.CommonModule, typeof i38.CdkTrapFocusModule, typeof i7_3.ClrHostWrappingModule, typeof i6_2.ClrConditionalModule, typeof i16_2.ClrPopoverModuleNext, typeof i3_2.ClrIconModule, typeof i2_6.ClrCommonFormsModule], [typeof i1_18.ClrDay, typeof i2_12.ClrDateContainer, typeof i3_12.ClrDateInput, typeof i4_8.ClrDateRangeStartInput, typeof i5_6.ClrDateRangeEndInput, typeof i6_6.ClrDateInputValidator, typeof i6_6.ClrDateRangeStartInputValidator, typeof i6_6.ClrDateRangeEndInputValidator, typeof i7_4.ClrDatepickerViewManager, typeof i8_4.ClrMonthpicker, typeof i9_4.ClrYearpicker, typeof i10_3.ClrDaypicker, typeof i11_2.ClrCalendar]>;
 }
 
 // @public (undocumented)
@@ -2178,26 +2198,6 @@ export class ClrDateRangeStartInputValidator implements Validator {
     static ɵdir: i0.ɵɵDirectiveDeclaration<ClrDateRangeStartInputValidator, "[clrRangeStartDate]", never, {}, {}, never, never, false, never>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<ClrDateRangeStartInputValidator, [{ optional: true; }, { optional: true; }]>;
-}
-
-// @public (undocumented)
-export class ClrDateSingleInput extends ClrDateInputBase implements AfterViewInit {
-    // (undocumented)
-    set date(date: Date | string);
-    // (undocumented)
-    dateChange: EventEmitter<Date>;
-    // (undocumented)
-    ngAfterViewInit(): void;
-    // (undocumented)
-    ngOnInit(): void;
-    // (undocumented)
-    onValueChange(target: HTMLInputElement): void;
-    // (undocumented)
-    protected updateDate(value: Date, setByUserInteraction?: boolean, fieldName?: string): void;
-    // (undocumented)
-    static ɵdir: i0.ɵɵDirectiveDeclaration<ClrDateSingleInput, "[clrDate]", never, { "date": "clrDate"; }, { "dateChange": "clrDateChange"; }, never, never, false, never>;
-    // (undocumented)
-    static ɵfac: i0.ɵɵFactoryDeclaration<ClrDateSingleInput, never>;
 }
 
 // @public (undocumented)
