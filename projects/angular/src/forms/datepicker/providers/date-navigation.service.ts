@@ -180,7 +180,7 @@ export class DateNavigationService {
   }
 
   updateDisplayedCalendarOnDaySelection(day: DayModel | undefined): void {
-    if (day && !this._displayedCalendar.isDayInCalendar(day)) {
+    if (day && this._displayedCalendar && !this._displayedCalendar.isDayInCalendar(day)) {
       this.setDisplayedCalendar(new CalendarModel(day.year, day.month));
     }
   }
