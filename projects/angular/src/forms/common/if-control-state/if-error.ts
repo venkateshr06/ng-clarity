@@ -5,6 +5,7 @@
  */
 
 import { Directive, EmbeddedViewRef, Input, Optional, TemplateRef, ViewContainerRef } from '@angular/core';
+import { NgControl } from '@angular/forms';
 
 import { NgControlService } from '../providers/ng-control.service';
 import { AbstractIfState } from './abstract-if-state';
@@ -34,16 +35,19 @@ export class ClrIfError extends AbstractIfState {
    * @param state CONTROL_STATE
    */
   protected override handleState(state: CONTROL_STATE) {
-    if (this.error && this.control && !!this.control.invalid) {
-      this.displayError(this.control.hasError(this.error));
-    } else if (this.error && this.secondaryControl) {
-      this.displayError(this.secondaryControl.hasError(this.error), this.secondaryControl);
-    } else {
-      this.displayError(CONTROL_STATE.INVALID === state);
+    if (this.error) {
+      this.controls.forEach(control => {
+        if (control.invalid) {
+          this.displayError(control.hasError(this.error), control);
+          return;
+        }
+      });
     }
+    // I think we shouldn't be able to get here
+    this.displayError(CONTROL_STATE.INVALID === state);
   }
 
-  private displayError(invalid: boolean, control = this.control) {
+  private displayError(invalid: boolean, control: NgControl = null) {
     /* if no container do nothing */
     if (!this.container) {
       return;
@@ -51,12 +55,12 @@ export class ClrIfError extends AbstractIfState {
     if (invalid) {
       if (this.displayedContent === false) {
         this.embeddedViewRef = this.container.createEmbeddedView(this.template, {
-          error: control.getError(this.error),
+          error: control ? control.getError(this.error) : '',
         });
         this.displayedContent = true;
       } else if (this.embeddedViewRef && this.embeddedViewRef.context) {
         // if view is already rendered, update the error object to keep it in sync
-        this.embeddedViewRef.context.error = control.getError(this.error);
+        this.embeddedViewRef.context.error = control ? control.getError(this.error) : '';
       }
     } else {
       this.container.clear();

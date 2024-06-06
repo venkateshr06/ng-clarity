@@ -65,10 +65,10 @@ export class ClrSelectContainer extends ClrAbstractContainer {
   ngOnInit() {
     /* The unsubscribe is handle inside the ClrAbstractContainer */
     this.subscriptions.push(
-      this.ngControlService.controlChanges.subscribe(control => {
-        if (control) {
-          this.multi = control.valueAccessor instanceof SelectMultipleControlValueAccessor;
-          this.control = control;
+      this.ngControlService.controlChanges.subscribe(controls => {
+        if (controls.length > 0) {
+          this.multi = controls[0].valueAccessor instanceof SelectMultipleControlValueAccessor;
+          this.control = controls[0];
         }
       })
     );

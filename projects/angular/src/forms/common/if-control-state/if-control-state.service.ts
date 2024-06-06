@@ -19,8 +19,7 @@ export enum CONTROL_STATE {
 @Injectable()
 export class IfControlStateService implements OnDestroy {
   private subscriptions: Subscription[] = [];
-  private control: NgControl;
-  private secondaryControl: NgControl;
+  private controls: NgControl[] = [];
 
   // Implement our own status changes observable, since Angular controls don't
   private _statusChanges = new BehaviorSubject(CONTROL_STATE.NONE);
@@ -28,29 +27,18 @@ export class IfControlStateService implements OnDestroy {
   constructor(private ngControlService: NgControlService) {
     // Wait for the control to be available
     this.subscriptions.push(
-      this.ngControlService.controlChanges.subscribe(control => {
-        if (control) {
-          this.control = control;
+      this.ngControlService.controlChanges.subscribe(controls => {
+        if (controls) {
+          this.controls = controls;
           // Subscribe to the status change events, only after touched
           // and emit the control
-          this.subscriptions.push(
-            this.control.statusChanges?.subscribe(() => {
-              this.triggerStatusChange();
-            })
-          );
-        }
-      }),
-
-      this.ngControlService.secondaryControlChanges.subscribe((control: NgControl) => {
-        if (control) {
-          this.secondaryControl = control;
-          // Subscribe to the status change events, only after touched
-          // and emit the control
-          this.subscriptions.push(
-            this.secondaryControl?.statusChanges?.subscribe(() => {
-              this.triggerStatusChange();
-            })
-          );
+          this.controls.forEach(control => {
+            this.subscriptions.push(
+              control.statusChanges?.subscribe(() => {
+                this.triggerStatusChange();
+              })
+            );
+          });
         }
       })
     );
@@ -66,11 +54,11 @@ export class IfControlStateService implements OnDestroy {
 
   triggerStatusChange() {
     /* Check if control is defined and run the code only then */
-    if (this.control) {
+    if (this.controls.length > 0) {
       // These status values are mutually exclusive, so a control
       // cannot be both valid AND invalid or invalid AND disabled.
       let finalStatus = CONTROL_STATE.NONE;
-      const combinedStatus = [this.control.status, this.secondaryControl?.status];
+      const combinedStatus = this.controls.map(control => control.status);
       if (combinedStatus.includes(CONTROL_STATE.INVALID)) {
         finalStatus = CONTROL_STATE.INVALID;
       } else if (combinedStatus.includes(CONTROL_STATE.VALID)) {
