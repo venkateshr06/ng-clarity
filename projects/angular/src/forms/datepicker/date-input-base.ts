@@ -184,8 +184,8 @@ export class ClrDateInputBase extends WrappedFormControl<ClrDateContainer> imple
    * if either of the field gets updated
    */
   protected validateDateRange() {
-    const primaryControl = this.ngControlService?.getControl();
-    const secondaryControl = this.ngControlService?.getSecondaryControl();
+    const primaryControl = this.ngControlService?.getControls()[0];
+    const secondaryControl = this.ngControlService?.getControls()[1];
     const isValid = this.dateNavigationService.selectedDay?.isBefore(this.dateNavigationService.selectedEndDay, true);
     if (isValid && (primaryControl?.hasError('range') || secondaryControl?.hasError('range'))) {
       primaryControl.control?.updateValueAndValidity();

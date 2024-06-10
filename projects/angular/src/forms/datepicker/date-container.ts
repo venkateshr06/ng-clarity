@@ -219,7 +219,8 @@ export class ClrDateContainer extends ClrAbstractContainer implements AfterViewI
   get isInputDateDisabled(): boolean {
     /* clrForm wrapper or without clrForm */
     return (
-      (this.control && this.control.disabled) || (this.dateFormControlService && this.dateFormControlService.disabled)
+      !!this.controls.find(control => control.disabled) ||
+      (this.dateFormControlService && this.dateFormControlService.disabled)
     );
   }
 

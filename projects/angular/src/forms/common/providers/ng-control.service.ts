@@ -19,14 +19,12 @@ export interface Helpers {
 @Injectable()
 export class NgControlService {
   // Observable to subscribe to the control, since its not available immediately for projected content
-  private _control: NgControl;
-  private _secondaryControl: NgControl;
-  private _controlChanges = new Subject<NgControl>();
-  private _secondaryControlChanges = new Subject<NgControl>();
+  private _controls: NgControl[] = [];
+  private _controlChanges = new Subject<NgControl[]>();
 
   private _helpers = new Subject<Helpers>();
 
-  get controlChanges(): Observable<NgControl> {
+  get controlChanges(): Observable<NgControl[]> {
     return this._controlChanges.asObservable();
   }
 
@@ -34,33 +32,21 @@ export class NgControlService {
     return this._helpers.asObservable();
   }
 
-  get secondaryControlChanges(): Observable<NgControl> {
-    return this._secondaryControlChanges.asObservable();
+  addControl(control: NgControl) {
+    this._controls.push(control);
+    this._controlChanges.next([control]);
   }
 
-  get hasAdditionalControls() {
-    return !!this._secondaryControl;
-  }
-
-  setControl(control: NgControl) {
-    this._control = control;
-    this._controlChanges.next(control);
+  setControls(controls: NgControl[]) {
+    this._controls = controls;
+    this._controlChanges.next(this._controls);
   }
 
   setHelpers(state: Helpers) {
     this._helpers.next(state);
   }
 
-  setSecondaryControl(control: NgControl) {
-    this._secondaryControl = control;
-    this._secondaryControlChanges.next(this._secondaryControl);
-  }
-
-  getControl() {
-    return this._control;
-  }
-
-  getSecondaryControl() {
-    return this._secondaryControl;
+  getControls() {
+    return this._controls;
   }
 }

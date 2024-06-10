@@ -16,7 +16,7 @@ import { CONTROL_STATE, IfControlStateService } from './if-control-state.service
 export abstract class AbstractIfState {
   protected subscriptions: Subscription[] = [];
   protected displayedContent = false;
-  protected control: NgControl;
+  protected controls: NgControl[] = [];
   protected secondaryControl: NgControl;
 
   constructor(
@@ -25,11 +25,8 @@ export abstract class AbstractIfState {
   ) {
     if (ngControlService) {
       this.subscriptions.push(
-        this.ngControlService.controlChanges.subscribe(control => {
-          this.control = control;
-        }),
-        this.ngControlService.secondaryControlChanges.subscribe(control => {
-          this.secondaryControl = control;
+        this.ngControlService.controlChanges.subscribe(controls => {
+          this.controls = controls;
         })
       );
     }
